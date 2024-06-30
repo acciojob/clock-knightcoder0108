@@ -1,27 +1,26 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const list = document.getElementById('infi-list');
-    let listItemCount = 0;
+// Function to update the timer element with the current date and time
+function updateTimer() {
+    // Get the current date and time
+    const now = new Date();
+    // console.log(now)
 
-    // Function to add list items
-    function addListItems(count) {
-        for (let i = 0; i < count; i++) {
-            const li = document.createElement('li');
-            li.textContent = `List Item ${listItemCount + 1}`;
-            list.appendChild(li);
-            listItemCount++;
-        }
-    }
+    // Format the date and time to a string
+    const dateTimeString = now.toLocaleString();
 
-    // Add initial 10 list items
-    addListItems(10);
+    // console.log(dateTimeString)
+    // Update the content of the timer element
+    document.getElementById('timer').textContent = dateTimeString;
+}
+updateTimer();
 
-    // Function to check if user reached the end of the list
-    function checkScroll() {
-        if (list.scrollTop + list.clientHeight >= list.scrollHeight - 10) { // Small buffer to ensure it works properly
-            addListItems(2);
-        }
-    }
+// Function to start updating the timer every second
+function startTimer() {
+    // Initial call to display the timer immediately
+    updateTimer();
 
-    // Add scroll event listener
-    list.addEventListener('scroll', checkScroll);
-});
+    // Set interval to update the timer every second
+    setInterval(updateTimer, 1000);
+}
+
+// Call the function to start updating the timer
+startTimer();
